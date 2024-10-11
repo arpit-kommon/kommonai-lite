@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.loginimg {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+    background: url(../assets/Kommonlogin.jpg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+
+
+}
+
+.custom-placeholder::placeholder  {
+  font-family: "Poppins", sans-serif;
+  color: black;
+
+}
+
+.my-form img {
+  position: relative;
+}
+
+.my-form img {
+  width: 340px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.my-form h5,
+p {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+
+}
+
+
+h5 a {
+  font-size: 20px;
+  text-decoration: underline;
+  color: black;
+  font-family: "Poppins", sans-serif;
+
+}
+
+form{
+  position: relative;
+  left: 5px;
+}
+
+.container1{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.my-form{
+  align-items: center;
+  background: #fff;
+  /* padding: 30px 50px; */
+  border-radius: 10px;
+}
+.form-title{
+  text-align: center;
+  margin-bottom: 30px;
+}
+.form-title h1{
+  margin: 0px;
+  color: black;
+  font-weight: 300;
+  font-size: 35px;
+  font-family: "Poppins", sans-serif;
+
+}
+.single-input{
+
+  background-color: #d9d9d9;
+  width: 310px;
+  border:1px solid #d9d9d9;
+  display: flex;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  padding: 10px;
+}
+.single-input i{
+  padding: 8px 16px;
+  color: black;
+}
+.single-input input{
+  font-family: "Poppins", sans-serif;
+
+  background-color: #d9d9d9;
+
+  border:0px solid #d9d9d9;
+  width: 100%;
+  outline: none;
+  height: 30px;
+  font-size: 18px;
+}
+.submit-btn{
+   margin-top: 30px;
+   background-color: #216b8d;
+  
+}
+.submit-btn  input{
+  background-color: #216b8d;
+   cursor: pointer; 
+   color: white;
+   text-align: center;
+   font-family: "Poppins", sans-serif;
+
+
+}
+
+
+.single-input {
+  position: relative; /* Set relative position for absolute children */
+  margin-bottom: 15px; /* Adjust spacing */
+}
+
+.single-input span {
+  margin-right: 10px; /* Space between icon and select */
+}
+
+.select-wrapper {
+  position: relative; /* Create a positioning context for the arrow */
+}
+
+.gender-select {
+  width: 100%; /* Make select take full width */
+  padding: 0px 0px 0px 5px;  ; /* Padding for a better look */
+  border: none; /* Border to match input fields */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  background-color: transparent; /* Background color */
+  appearance: none; /* Remove default styling */
+  outline: none; /* Remove outline */
+}
+
+.arrow-icon {
+  position: absolute; /* Position the icon */
+  right: 10px; /* Space from the right */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  pointer-events: none; /* Prevent interaction */
+}
+

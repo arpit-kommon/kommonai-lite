@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main2{
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+}
+.main2 {
+    background: url(../assets/Kommonlogin.jpg);
+    background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.main-container{
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.content1{
+    width: 100%;
+    position: absolute;
+    /* bottom: 30%; */
+}
+
+.content1-img{
+    width: 40%;
+    position: relative;
+    top: 50px;
+}
+
+.content1-img img{
+    width: 100%;
+}
+
+.content1 h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+  font-style: normal;
+    font-size: 109px;
+    width: 100%;
+    text-align: center;
+    color: #191919;
+}
+
+h3{
+    position: relative;
+    top: 40px;
+    right: 20px;
+}
+.content1 h3{
+    font-family: "Poppins", sans-serif;
+    font-size: 39px;
+    width: 100%;
+    text-align: right;
+    font-weight: 300;
+    color: #191919;
+    
+}
+.content1 .line3{
+ position: relative;
+ top: -40px;
+ left: 0;
+    
+}
+.content1 .line3{
+    font-family: "Poppins", sans-serif;
+    font-size: 38px;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+     
+    
+}
+
+
+.btn2 a{
+    padding: 15px 50px;
+    border-radius: 12px;
+    background-color: #216b8d;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    text-decoration: none;
+    margin-top: 50px;
+    margin: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  
+
+
+}
+.btn2 a:hover{
+
+    background-color: #191919;
+    color: white;
+ 
+
+
+}
+
+
+.btn2{
+    position: relative;
+    top: 60px;
+    
+    /* left: 20px */
+}
+
+.content1 .btn2{
+    justify-content: center;
+    display: flex;
+}
+
+
+
+@media screen and (min-width:0px) and (max-width:768px) {
+    .content1 h1 {
+        font-size: 14vw;   
+    }
+
+    .content1 h3 {
+        font-size: 4.9vw;
+        right: 6vw;
+        top: 5vw;
+    }
+
+    .content1 h3.line3 {
+        font-size: 4.9vw;
+    }
+
+    .content1 .line3{
+        position: relative;
+        top: -6vw;
+        left: 0;
+           
+       }
+     
+       .btn2 a{
+        padding: 20px 30px;
+    
+    
+    }
+    
+}
+

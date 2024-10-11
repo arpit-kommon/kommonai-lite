@@ -1,0 +1,257 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  background: url(./assets/Kommonlogin.jpg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+
+}
+
+
+
+.container {
+  display: flex;
+}
+
+.container-chat {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  text-align: left;
+}
+
+.chat-Historyc {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20%;
+  width: 3.5vw;
+  height: 3.5vw;
+}
+
+.chat-Historyo {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4%;
+  width: 30vw;
+  height: 45vh;
+}
+
+/* ::placeholder {
+  color: white;
+  text-align: center;
+  opacity: 1;
+} */
+
+.placeholder1::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.placeholder2::placeholder {
+  color: rgba(219, 168, 66, 255);
+  text-align: center;
+}
+
+.placeholder3::placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 15px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+.icon {
+  position: relative;
+  margin-left: 50px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 20px;
+  height: 20px;
+
+  span {
+    width: 3px;
+    height: 100%;
+    background-color: orange;
+    border-radius: 3px;
+    content: '';
+  }
+}
+
+@keyframes bounce {
+  10% {
+    transform: scaleY(0.3);
+    /* start by scaling to 30% */
+  }
+
+  30% {
+    transform: scaleY(1);
+    /* scale up to 100% */
+  }
+
+  60% {
+    transform: scaleY(0.5);
+    /* scale down to 50% */
+  }
+
+  80% {
+    transform: scaleY(0.75);
+    /* scale up to 75% */
+  }
+
+  100% {
+    transform: scaleY(0.6);
+    /* scale down to 60% */
+  }
+}
+
+.span-prop {
+  width: 10px;
+  height: 100%;
+  background-color: orange;
+  border-radius: 3px;
+  animation: bounce 2.2s ease infinite alternate;
+  content: '';
+}
+
+span {
+  &:nth-of-type(2) {
+    animation-delay: -2.2s;
+    /* Start at the end of animation */
+  }
+
+  &:nth-of-type(3) {
+    animation-delay: -3.7s;
+    /* Start mid-way of return of animation */
+  }
+}
+
+.ChatBubble {
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+  z-index: 1;
+}
+
+
+
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Ensures loader covers full viewport height */
+  background-color: #000;
+  /* You can customize the background color */
+  color: #fff;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-container p {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #fff;
+  /* Text color */
+}
+
+
+
+
+html, body {
+  height: 100vh;
+  /* border: 2px solid red; */
+}
+
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#bars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+/*     background: black; */
+}
+.record_animation{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bar {
+  background: #52467b;
+  bottom: 1px;
+  height: 3px;
+  width: 10px;
+  margin: 0px 4px;
+  border-radius: 5px;
+  animation: sound 0ms -600ms linear infinite alternate;
+}
+
+@keyframes sound {
+  0% {
+     opacity: .35;
+      height: 3px; 
+  }
+  100% {
+      opacity: 1;       
+      height: 70px;        
+  }
+}
+
+.bar:nth-child(1)  { left: 1px; animation-duration: 474ms; }
+.bar:nth-child(2)  { left: 15px; animation-duration: 433ms; }
+.bar:nth-child(3)  { left: 29px; animation-duration: 407ms; }
+.bar:nth-child(4)  { left: 43px; animation-duration: 458ms; }
+.bar:nth-child(5)  { left: 57px; animation-duration: 400ms; }
+.bar:nth-child(6)  { left: 71px; animation-duration: 427ms; }
+.bar:nth-child(7)  { left: 85px; animation-duration: 441ms; }
+.bar:nth-child(8)  { left: 99px; animation-duration: 419ms; }
+.bar:nth-child(9)  { left: 113px; animation-duration: 487ms; }
+.bar:nth-child(10) { left: 127px; animation-duration: 442ms; }
