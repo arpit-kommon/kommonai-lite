@@ -85,7 +85,9 @@ const Audiospeaker = (props) => {
   const [assessmentData, setAssessmentData] = useState(null); // Changed to null since the data is an object
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // Loading should be false initially
+  const [loader, setLoader] = useState(false); // Loading should be false initially
 
+  const [showIntro, setShowIntro] = useState(true);
   const [spAsseStat, setSpAsseStat] = useState(null); // New state for assessment status
   const [simulationIdd, setSimulationIdd] = useState(null); // Track simulationId
   const [userIdd, setUserId] = useState(null); // Track simulationId
@@ -156,6 +158,7 @@ const Audiospeaker = (props) => {
     setConversationEnded(true); // Set conversationEnded to true to hide the buttons and show the message
     setStatus('inProgress');
     stopRecording(); // Assuming this stops the audio recording
+    setLoader(true);
   };
 
   // Handle restart practice
@@ -225,10 +228,15 @@ const Audiospeaker = (props) => {
       const data = response.data.success.data;
       setSpAsseStat(status); // Set the assessment status (PENDING: 0, IN_PROGRESS: 1, ENDED: 2)
       setAssessmentData(data); // Set the assessment data
+      if(status === 2)
+      {
+        setLoader(false);
+      }
     } catch (err) {
       setError(err.response?.data || err.message);
     } finally {
       setLoading(false); // Stop loading
+      
     }
   };
 
@@ -307,7 +315,7 @@ const Audiospeaker = (props) => {
     let cursorY = 20; // Start position for Y axis
     const margin = 21; // Adjust margin as needed
 
-    doc.setFont('Poppins','normal');
+    doc.setFont('Poppins', 'normal');
 
     // ** Load Images (Base64 or URL) **
     const firstImageBase64 = frstImg;
@@ -649,7 +657,7 @@ const Audiospeaker = (props) => {
       const footerText = 'Copyright | Kommonify Ventures Private Limited';
       doc.setFontSize(10);
       doc.text(footerText, margin, pageHeight - 10);
-      doc.text(`Page ${i} of ${pageCount}`, pageWidth - margin, pageHeight - 10,{ align: 'right' });
+      doc.text(`Page ${i} of ${pageCount}`, pageWidth - margin, pageHeight - 10, { align: 'right' });
     }
 
     doc.save('assessment_report.pdf');
@@ -665,6 +673,7 @@ const Audiospeaker = (props) => {
       let audioOutputStream;
       setAnimation(true);
       setbtn(false);
+      setShowIntro(false)
       //   try {
       // audioOutputStream = await navigator.mediaDevices.getDisplayMedia({
       //   audio: true,
@@ -950,7 +959,7 @@ const Audiospeaker = (props) => {
                   fontWeight: 500,
                 }}
               >
-                GET STOP
+                STOP SESSION
               </button>
             )}
 
@@ -1123,6 +1132,13 @@ const Audiospeaker = (props) => {
           )}
         </div>
       </section>
+      {showIntro && (
+
+        <div className='intro'>
+          <h1>Start speech with your introduction or choose any topic that you want for 3 minutes...</h1>
+
+        </div>
+      )}
       {animation && (
         <div className="record_animation">
           <div id="bars">
@@ -1136,6 +1152,18 @@ const Audiospeaker = (props) => {
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
+          </div>
+        </div>
+      )}
+
+      {loader && (
+        <div className='intro'>
+          <div class="spinner-box">
+            <div class="pulse-container">
+              <div class="pulse-bubble pulse-bubble-1"></div>
+              <div class="pulse-bubble pulse-bubble-2"></div>
+              <div class="pulse-bubble pulse-bubble-3"></div>
+            </div>
           </div>
         </div>
       )}
