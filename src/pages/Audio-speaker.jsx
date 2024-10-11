@@ -307,7 +307,7 @@ const Audiospeaker = (props) => {
     let cursorY = 20; // Start position for Y axis
     const margin = 21; // Adjust margin as needed
 
-    doc.setFont('PoppinsRegular');
+    doc.setFont('Poppins','normal');
 
     // ** Load Images (Base64 or URL) **
     const firstImageBase64 = frstImg;
@@ -407,7 +407,7 @@ const Audiospeaker = (props) => {
         lineWidth: 0,
         valign: 'middle',
         cellPadding: { top: 0, bottom: 0, left: 0, right: 0 },
-        fontStyle: 'PoppinsRegular'
+        fontStyle: 'normal'
       },
     });
 
