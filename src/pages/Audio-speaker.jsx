@@ -649,7 +649,7 @@ const Audiospeaker = (props) => {
       const footerText = 'Copyright | Kommonify Ventures Private Limited';
       doc.setFontSize(10);
       doc.text(footerText, margin, pageHeight - 10);
-      doc.text(`Page ${i} of ${pageCount}, pageWidth - margin, pageHeight - 10, { align: 'right' }`);
+      doc.text(`Page ${i} of ${pageCount}`, pageWidth - margin, pageHeight - 10,{ align: 'right' });
     }
 
     doc.save('assessment_report.pdf');
