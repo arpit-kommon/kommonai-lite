@@ -258,7 +258,7 @@ const Audiospeaker = (props) => {
         if (spAsseStat === 2) {
           clearInterval(pollingInterval); // Stop polling when assessment is complete
         }
-      }, 5000); // Poll every 5 seconds
+      }, 15000); // Poll every 5 seconds
     }
 
     return () => clearInterval(pollingInterval); // Clean up the interval on component unmount
