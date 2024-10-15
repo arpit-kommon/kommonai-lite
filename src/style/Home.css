@@ -80,7 +80,7 @@ h3{
 }
 .content .line2{
     font-family: "Poppins", sans-serif;
-    font-size: 48px;
+    font-size: 54px;
     width: 100%;
     text-align: center;
      
@@ -121,7 +121,7 @@ h3{
     }
 
     .content h3.line2 {
-        font-size: 6.1vw;
+        font-size: 7.1vw;
     }
 
     .content .line2{
@@ -136,6 +136,12 @@ h3{
     
     
     }
+
+    .content-img{
+        width: 60%;
+        right: 20%;
+    }
+    
     
 }
 

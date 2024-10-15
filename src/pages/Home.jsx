@@ -16,7 +16,7 @@ export default function Home() {
        
         <h3 class="line1">HELLO, I AM</h3>
         <h1>KOMMON AI</h1>
-        <h3 class="line2 ">YOUR INTERVIEW COMPANION</h3>
+        <h3 class="line2 ">YOUR SPEECH EVALUATOR</h3>
         <div class="btn">
             <Link to="login"> START EXPERIENCE</Link>
 

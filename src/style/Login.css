@@ -4,7 +4,7 @@
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-    background: url(../assets/Kommonlogin.jpg);
+  background: url(../assets/backgroundimage.jpg);
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -24,9 +24,9 @@
 }
 
 .my-form img {
-  width: 340px;
+  width: 280px;
   align-items: center;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 .my-form h5,
 p {
@@ -44,10 +44,7 @@ h5 a {
 
 }
 
-form{
-  position: relative;
-  left: 5px;
-}
+
 
 .container1{
   width: 100%;
@@ -77,7 +74,7 @@ form{
 .single-input{
 
   background-color: #d9d9d9;
-  width: 310px;
+  width: 280px;
   border:1px solid #d9d9d9;
   display: flex;
   margin-bottom: 30px;

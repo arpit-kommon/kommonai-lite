@@ -10,7 +10,7 @@
     align-items: center;
 }
 .main2 {
-    background: url(../assets/Kommonlogin.jpg);
+    background: url(../assets/backgroundimage.jpg);
     background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@
 .content1{
     width: 100%;
     position: absolute;
-    /* bottom: 30%; */
+    bottom: 25%;
 }
 
 .content1-img{
@@ -147,10 +147,19 @@ h3{
        }
      
        .btn2 a{
-        padding: 20px 30px;
+        padding: 10px 30px;
     
     
     }
+    .content1-img{
+        width: 60%;
+        top: -10px;
+    }
+
+    .content1{
+        bottom: 35%;
+    }
+    
     
 }
 

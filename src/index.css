@@ -1,22 +1,41 @@
-#root {
+/* #root {
   width: 100vw;
   height: 100vh;
-  background: url(./assets/Kommonlogin.jpg);
+  background: url(./assets/backgroundimage.jpg);
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-}
+
+
+
+} */
+
 
 body {
   padding: 0;
   margin: 0;
+  background: url(./assets/backgroundimage.jpg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  height: 100vh;
+
 
 }
 
+.content-img-audio img {
+  width: 100%;
+ 
+}
+.content-img-audio  {
+  width: 200px;
+  margin: 35px 0 0 60px;
 
-
+}
 .container {
-  display: flex;
+  /* display: flex; */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .container-chat {
@@ -74,16 +93,30 @@ body {
 }
 .intro{
   width: 60%;
-  height: 100vh;
+  height: 60vh;
   margin: 0 auto;
   /* padding-top: 160px; */
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* font-size: 59px; */
+  /* color: white; */
+
   
   
 }
+
+@media screen and (min-width:0px) and (max-width:600px) {
+  .intro{
+    font-size: 3vw;
+  }
+  .conversationreport img{
+    width: 70vw;  
+    height: 20vw;
+  }
+}
+
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -176,9 +209,9 @@ span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 85vh;
   /* Ensures loader covers full viewport height */
-  background-color: #000;
+  background-color: #fffdfd;
   /* You can customize the background color */
   color: #fff;
 }
@@ -212,16 +245,8 @@ span {
 
 
 
-html, body {
-  height: 100vh;
-  /* border: 2px solid red; */
-}
 
-body {
-display: flex;
-justify-content: center;
-align-items: center;
-}
+
 
 #bars {
   display: flex;
@@ -231,13 +256,14 @@ align-items: center;
 }
 .record_animation{
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .bar {
-  background: #52467b;
+  /* background: #52467b; */
+  background: rgb(0, 0, 0);
   bottom: 1px;
   height: 3px;
   width: 10px;
@@ -335,128 +361,9 @@ align-items: center;
   }
 }
 
-/* GRID STYLING */
 
-* {
-  box-sizing: border-box;
-}
 
-body {
-  min-height: 100vh;
-  background-color: #1d2630;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
 
-.spinner-box {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-}
-
-/* SPINNING CIRCLE */
-
-.leo-border-1 {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  padding: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: rgb(63,249,220);
-  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(63,249,220,1) 100%);
-  animation: spin3D 1.8s linear 0s infinite;
-}
-
-.leo-core-1 {
-  width: 100%;
-  height: 100%;
-  background-color: #37474faa;
-  border-radius: 50%;
-}
-
-.leo-border-2 {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  padding: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: rgb(251, 91, 83);
-  background: linear-gradient(0deg, rgba(251, 91, 83, 0.1) 33%, rgba(251, 91, 83, 1) 100%);
-  animation: spin3D 2.2s linear 0s infinite;
-}
-
-.leo-core-2 {
-  width: 100%;
-  height: 100%;
-  background-color: #1d2630aa;
-  border-radius: 50%;
-}
-
-/* ALTERNATING ORBITS */
-
-.circle-border {
-  width: 150px;
-  height: 150px;
-  padding: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: rgb(63,249,220);
-  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(63,249,220,1) 100%);
-  animation: spin .8s linear 0s infinite;
-}
-
-.circle-core {
-  width: 100%;
-  height: 100%;
-  background-color: #1d2630;
-  border-radius: 50%;
-}
-
-/* X-ROTATING BOXES */
-
-.configure-border-1 {
-  width: 115px;
-  height: 115px;
-  padding: 3px;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fb5b53;
-  animation: configure-clockwise 3s ease-in-out 0s infinite alternate;
-}
-
-.configure-border-2 {
-  width: 115px;
-  height: 115px;
-  padding: 3px;
-  left: -115px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(63,249,220);
-  transform: rotate(45deg);
-  animation: configure-xclockwise 3s ease-in-out 0s infinite alternate;
-}
-
-.configure-core {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-}
 
 /* PULSE BUBBLES */
 
@@ -471,7 +378,7 @@ body {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #000;
+  background-color: #000000;
 }
 
 .pulse-bubble-1 {
@@ -484,15 +391,59 @@ body {
     animation: pulse .4s ease .4s infinite alternate;
 }
 
-/* SOLAR SYSTEM */
 
 
+/* ===========audio speker container responsive css ============================ */
 
-.three-quarter-spinner {
-  width: 50px;
-  height: 50px;
-  border: 3px solid #fb5b53;
-  border-top: 3px solid transparent;
-  border-radius: 50%;
-  animation: spin .5s linear 0s infinite;
+.record-button {
+  padding: 10px 20px;
+  background-color: #e07c30;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.record-button:hover {
+  background-color: #1d2630;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .record-button {
+    width: 210px;
+    padding: 8px 16px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .record-button {
+    width: 200px;
+    padding: 8px 12px;
+    font-size: 18px;
+  }
+}
+
+
+.restart-button button{
+    margin-top:'-20px';
+    bottom: '0';
+    padding: '10px 40px';
+    background-color: '#e07c30';
+    border: 'none';
+    border-radius: '15px';
+    color: '#fff';
+    font-size: '15px';
+    cursor: 'pointer';
+    font-family: 'Poppins, sans-serif';
+    font-weight:500;
 }

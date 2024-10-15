@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../style/Login.css';
-import logo4 from "../assets/kommonailogo.png";
+import logo4 from "../assets/kommonschoollogo.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -41,12 +42,14 @@ const Login = () => {
         setEmail('');
         setPassword('');
         navigate('/laguage'); // Redirect to home page after successful login
+        toast.success("Login succesfully");
+
       } else {
-        setErrorMessage('Invalid credentials. Please try again.');
+        toast.error('Invalid credentials. Please try again.');
       }
     } catch (err) {
       console.error('Login failed', err.message);
-      setErrorMessage('An error occurred while logging in. Please try again later.');
+      toast.error('An error occurred while logging in. Please try again later.');
     }
   };
 

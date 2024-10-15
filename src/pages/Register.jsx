@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/Login.css'; // Assuming you have CSS for styling
-import logo4 from "../assets/kommonailogo.png"; // Update this to the correct path if needed
+import logo4 from "../assets/kommonschoollogo.png";
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [firstName, setFirstName] = useState(''); // State for first name
@@ -31,7 +32,7 @@ const Register = () => {
     e.preventDefault();
 
     if (!passwordMatch) {
-      alert('Passwords do not match');
+      toast.error('Passwords do not match');
       return;
     }
 
@@ -53,12 +54,13 @@ const Register = () => {
         setPassword('');
         setConfirmPassword('');
         navigate('/login'); // Redirect to login page after successful registration
+        toast.success("Registration Successfully");
       } else {
-        alert('Registration failed. Please try again.');
+        toast.error('Registration failed. Please try again.');
       }
     } catch (err) {
       console.error('Registration failed', err.message);
-      alert('Registration failed. Please try again.');
+      toast.error('Registration failed. Please try again.');
     }
   };
 

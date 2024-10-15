@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import logo1 from "../assets/Kommon ai.png";
 import logo2 from "../assets/kommonschoollogo.png";
 import btnimg from "../assets/switch.png";
-import logo3 from "../assets/conversation.png";
+import logo3 from "../assets/conversation-assessment.png";
 import asserp from '../assets/assessment-report.pdf'
 import { Link } from 'react-router-dom';
 import axios from "axios";
@@ -20,6 +20,8 @@ import languages from '../images/language.png'
 import tipss from '../images/tips.png'
 import notoSansDevanagariBase64 from '../fonts/noto-regular';
 import poppins from '../fonts/base';
+import logo4 from "../assets/kommonschoollogo.png";
+
 // import { useLocation } from 'react-router-dom';
 // import {components, pipelines, MediaStream} from 'media-stream-library';
 
@@ -228,15 +230,14 @@ const Audiospeaker = (props) => {
       const data = response.data.success.data;
       setSpAsseStat(status); // Set the assessment status (PENDING: 0, IN_PROGRESS: 1, ENDED: 2)
       setAssessmentData(data); // Set the assessment data
-      if(status === 2)
-      {
+      if (status === 2) {
         setLoader(false);
       }
     } catch (err) {
       setError(err.response?.data || err.message);
     } finally {
       setLoading(false); // Stop loading
-      
+
     }
   };
 
@@ -256,9 +257,9 @@ const Audiospeaker = (props) => {
         await fetchSpeakerAssessment();
 
         if (spAsseStat === 2) {
-          clearInterval(pollingInterval); // Stop polling when assessment is complete
+          // clearInterval(pollingInterval); // Stop polling when assessment is complete
         }
-      }, 15000); // Poll every 5 seconds
+      }, 10000); // Poll every 5 seconds
     }
 
     return () => clearInterval(pollingInterval); // Clean up the interval on component unmount
@@ -820,63 +821,71 @@ const Audiospeaker = (props) => {
 
 
   return (
-    <div className='audio-home'
-      style={{
-        width: '100%',
-        position: 'relative',
-      }}
-    >
-      {/* Top right button (only visible after the first conversation and when "T" is not being held down) */}
-      {showTopButton && firstConversation && !conversationEnded && (
-        <button
-          onClick={handleEndConversation} // Call handleEndConversation when the button is clicked
-          style={{
-            position: 'absolute',
-            top: '5px',
-            right: '-1400px',
-            padding: '10px 20px',
-            backgroundColor: '#216b8d',
-            border: 'none',
-            borderRadius: '15px',
-            cursor: 'pointer',
-            color: '#fff',
-            fontSize: '15px',
-            zIndex: 1000,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+    <>
 
+
+      <div className="container-image">
+        <div className='audio-home'
+          style={{
+            width: '100%',
+            position: 'relative',
           }}
         >
-          <img
-            src={btnimg}
-            height="40px"
-            width="40px"
-            alt="Stop Interaction Icon"
-          />
-          STOP INTERACTION
-        </button>
-      )}
 
-      <section
-        className="container"
-        style={{
-          position: 'absolute',
-          top: '65vh',
-          left: '2.5vw',
-          right: '2.5vw',
-          // width: '90%',
-          height: '200px',
-          borderRadius: '10px',
-          background: 'rgba(0, 0, 0, 0.7)',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        {/* Left logo */}
-        <div
+
+
+          {/* Top right button (only visible after the first conversation and when "T" is not being held down) */}
+          {showTopButton && firstConversation && !conversationEnded && (
+            <button
+              onClick={handleEndConversation} // Call handleEndConversation when the button is clicked
+              style={{
+                position: 'absolute',
+                top: '5px',
+                right: '-1400px',
+                padding: '10px 20px',
+                backgroundColor: '#216b8d',
+                border: 'none',
+                borderRadius: '15px',
+                cursor: 'pointer',
+                color: '#fff',
+                fontSize: '15px',
+                zIndex: 1000,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+
+              }}
+            >
+              <img
+                src={btnimg}
+                height="40px"
+                width="40px"
+                alt="Stop Interaction Icon"
+              />
+              STOP INTERACTION
+            </button>
+          )}
+
+          <section
+
+            style={{
+              position: 'absolute',
+              top: '65vh',
+              left: '2.5vw',
+              right: '2.5vw',
+              // width: '90%',
+              height: '200px',
+              borderRadius: '10px',
+              // background: 'rgba(0, 0, 0, 0.7)',
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              display: 'grid'
+            }}
+          >
+            {/* Left logo */}
+            {/* <div
           style={{
             marginLeft: '10px',
             marginTop: '20px',
@@ -889,206 +898,180 @@ const Audiospeaker = (props) => {
             width="250px"
             alt="Left logo"
           />
-        </div>
-
-        <section
-          className="container-chat"
-          style={{
-            borderRadius: '10px',
-            marginBottom: '15px',
-            marginTop: '25px',
-            width: '60%',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            fontSize: '20px',
-            alignItems: 'center',
-            fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
-
-          }}
-        >
-          {/* Key pressed indicator */}
-          <div>
-            {keyPressed && (
-              <div className="icon">
-                <span className="span-prop" />
-                <span className="span-prop" />
-                <span className="span-prop" />
-              </div>
-            )}
-
-            {!isRecording && (
-              <button
-                className="record-button"
-                onClick={startRecording}
-                disabled={isUploading}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#e07c30',
-                  border: 'none',
-                  borderRadius: '10px',
-                  color: '#fff',
-                  fontSize: '15px',
-                  cursor: 'pointer',
-                  width: '200px',
-                  alignItems: 'center',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontWeight: 500
-                }}
-              >
-                GET STARTED
-              </button>
-            )}
-            {isRecording && !btn && (
-              <button
-                className="record-button"
-                onClick={handleEndConversation}
-                disabled={isUploading}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#e07c30',
-                  border: 'none',
-                  borderRadius: '10px',
-                  color: '#fff',
-                  fontSize: '15px',
-                  cursor: 'pointer',
-                  width: '200px',
-                  alignItems: 'center',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontWeight: 500,
-                }}
-              >
-                STOP SESSION
-              </button>
-            )}
-
-
-            {/* No need for a "Recording..." button */}
-          </div>
-
-          {/* Display userText or status message */}
-          {userText === '' ? (
-            <p
+        </div>*/}
+            <section
+              className="container-chat"
               style={{
-                fontSize: '25px',
-                color: 'rgba(219,168,66,255)',
+                borderRadius: '10px',
+                marginBottom: '15px',
+                marginTop: '25px',
+                // width: '60%',
                 textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                fontSize: '20px',
+                alignItems: 'center',
                 fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
-                fontWeight: 500
+
               }}
             >
-              {/* Press [T] to talk */}
-            </p>
-          ) : conversationEnded ? (
-            status === 'inProgress' ? (
-              <p
-                style={{
-                  fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
-                  fontWeight: 500,
-                  fontSize: '25px',
-                  color: 'white',
-                  textAlign: 'center',
-                }}
-              >
+              {/* Key pressed indicator */}
+              <div>
+                {keyPressed && (
+                  <div className="icon">
+                    <span className="span-prop" />
+                    <span className="span-prop" />
+                    <span className="span-prop" />
+                  </div>
+                )}
 
-                <img
-                  loading="lazy"
-                  src={logo3}
-                  height="80px"
-                  width="500px"
-                  alt="Right logo"
-                />
+                {!isRecording && (
+                  <button
+                    className="record-button"
+                    onClick={startRecording}
+                    disabled={isUploading}
+                  >
+                    GET STARTED
+                  </button>
+                )}
+                {isRecording && !btn && (
+                  <button
+                    className="record-button"
+                    onClick={handleEndConversation}
+                    disabled={isUploading}
+                  >
+                    STOP SESSION
+                  </button>
 
-              </p>
-            ) : status === 'preparingReport' ? (
-              <button
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#e07c30',
-                  border: 'none',
-                  borderRadius: '10px',
-                  color: '#fff',
-                  fontSize: '15px',
-                  cursor: 'pointer',
-                  width: '310px',
-                  alignItems: 'center',
-                  fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
-                  fontWeight: 500
-                }}
-              >
-                PREPARING ASSESSMENT REPORT
-              </button>
-            ) : status === 'downloadReport' ? (
-              <button
-                onClick={downloadPDF} // Only enable download on completion
-                disabled={spAsseStat !== 2 || loading} // Disable button unless the assessment is complete
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: spAsseStat === 2 ? '#e07c30' : '#cccccc', // Change color based on status
-                  border: 'none',
-                  borderRadius: '10px',
-                  color: '#fff',
-                  fontSize: '15px',
-                  cursor: spAsseStat === 2 ? 'pointer' : 'not-allowed', // Show pointer only when enabled
-                  width: '310px',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontWeight: 500,
-                }}
-              >
-                {loading ? 'Fetching Assessment...' : getStatusMessage()} {/* Update button text */}
-              </button>
-            ) : null
-          ) : (
+                )}
+
+
+                {/* No need for a "Recording..." button */}
+              </div>
+
+              {/* Display userText or status message */}
+              {userText === '' ? (
+                <p
+                  style={{
+                    fontSize: '25px',
+                    color: 'rgba(219,168,66,255)',
+                    textAlign: 'center',
+                    fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+                    fontWeight: 500
+                  }}
+                >
+                  {/* Press [T] to talk */}
+                </p>
+              ) : conversationEnded ? (
+                status === 'inProgress' ? (
+                  <p className='conversationreport'
+                    style={{
+                      fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+                      fontWeight: 500,
+                      fontSize: '25px',
+                      color: 'white',
+                      textAlign: 'center',
+                    }}
+                  >
+
+                    <img
+                      loading="lazy"
+                      src={logo3}
+                      height="80px"
+                      width="350px"
+                      alt="Right logo"
+                    />
+
+                  </p>
+                ) : status === 'preparingReport' ? (
+                  <button
+                    style={{
+                      padding: '10px 20px',
+                      backgroundColor: '#e07c30',
+                      border: 'none',
+                      borderRadius: '25px',
+                      color: '#fff',
+                      fontSize: '16px',
+                      cursor: 'pointer',
+                      width: '300px',
+                      alignItems: 'center',
+                      fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+                      fontWeight: 500
+                    }}
+                  >
+                    PREPARING ASSESSMENT REPORT
+                  </button>
+                ) : status === 'downloadReport' ? (
+                  <button
+                    onClick={downloadPDF} // Only enable download on completion
+                    disabled={spAsseStat !== 2 || loading} // Disable button unless the assessment is complete
+                    style={{
+                      padding: '10px 20px',
+                      backgroundColor: spAsseStat === 2 ? '#e07c30' : '#cccccc', // Change color based on status
+                      border: 'none',
+                      borderRadius: '25px',
+                      color: '#fff',
+                      fontSize: '16px',
+                      cursor: spAsseStat === 2 ? 'pointer' : 'not-allowed', // Show pointer only when enabled
+                      width: '300px',
+                      fontFamily: 'Poppins, sans-serif',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {loading ? 'Fetching Assessment...' : getStatusMessage()} {/* Update button text */}
+                  </button>
+                ) : null
+              ) : (
+                <div
+                  style={{
+                    width: '100%',
+                    textAlign: 'center',
+                  }}
+                >
+                  <p
+                    style={{
+                      color: '#FFFFFF',
+                      marginTop: '10px',
+                    }}
+                  >
+                    {userText}
+                  </p>
+                  <p
+                    style={{
+                      color: '#39FF14',
+                    }}
+                  >
+                    {npcText}
+                  </p>
+                </div>
+              )}
+            </section>
+
+            {/* Right logo and button below */}
             <div
               style={{
-                width: '100%',
-                textAlign: 'center',
+                marginRight: '10px',
+                marginTop: '-40px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+
               }}
             >
-              <p
-                style={{
-                  color: '#FFFFFF',
-                  marginTop: '10px',
-                }}
-              >
-                {userText}
-              </p>
-              <p
-                style={{
-                  color: '#39FF14',
-                }}
-              >
-                {npcText}
-              </p>
-            </div>
-          )}
-        </section>
-
-        {/* Right logo and button below */}
-        <div
-          style={{
-            marginRight: '10px',
-            marginTop: '-40px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
-
-          }}
-        >
-          <Link to="/">
+              {/* <Link to="/">
             <img
               loading="lazy"
               src={logo1}
-              height="150px"
-              width="280px"
+              height="180vh"
+              width="280vw"
               alt="Right logo"
             />
-          </Link>
-          {/* Button to trigger talk functionality */}
+          </Link> */}
+              {/* Button to trigger talk functionality */}
 
-          {/* {isRecording && !conversationEnded && (
+              {/* {isRecording && !conversationEnded && (
                 <button
                   onMouseDown={handleButtonMouseDown} // Start speaking when button is pressed
                   onMouseUp={handleButtonMouseUp} // Stop speaking when button is released
@@ -1110,65 +1093,72 @@ const Audiospeaker = (props) => {
                 </button>
               )} */}
 
-          {/* Restart practice button */}
-          {status === 'downloadReport' && (
-            <button
-              onClick={handleRestartPractice} // Call handleRestartPractice when the button is clicked
-              style={{
-                marginTop: '-20px',
-                padding: '10px 40px',
-                backgroundColor: '#e07c30',
-                border: 'none',
-                borderRadius: '15px',
-                color: '#fff',
-                fontSize: '15px',
-                cursor: 'pointer',
-                fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
-                fontWeight: 500
-              }}
-            >
-              RESTART PRACTICE
-            </button>
-          )}
-        </div>
-      </section>
-      {showIntro && (
-
-        <div className='intro'>
-          <h1>Start speech with your introduction or choose any topic that you want for 3 minutes...</h1>
-
-        </div>
-      )}
-      {animation && (
-        <div className="record_animation">
-          <div id="bars">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-          </div>
-        </div>
-      )}
-
-      {loader && (
-        <div className='intro'>
-          <div class="spinner-box">
-            <div class="pulse-container">
-              <div class="pulse-bubble pulse-bubble-1"></div>
-              <div class="pulse-bubble pulse-bubble-2"></div>
-              <div class="pulse-bubble pulse-bubble-3"></div>
+              {/* Restart practice button */}
+              {status === 'downloadReport' && (
+                <button
+                  onClick={handleRestartPractice} // Call handleRestartPractice when the button is clicked
+                  style={{
+                    marginTop: '-20px',
+                    padding: '10px 40px',
+                    backgroundColor: '#e07c30',
+                    border: 'none',
+                    borderRadius: '25px',
+                    color: '#fff',
+                    fontSize: '16px',
+                    cursor: 'pointer',
+                    fontFamily: 'Poppins, sans-serif', // Apply Poppins font family
+                    fontWeight: 500
+                  }}
+                >
+                  RESTART PRACTICE
+                </button>
+              )}
             </div>
+          </section>
+          <div class="content-img-audio">
+             <Link to="/"> <img src={logo4} /></Link>
+            </div>
+            {showIntro && (
+              <div className='intro'>
+            
+                <h1>Start speech with your introduction or choose any topic that you want for 3 minutes...</h1>
+
+              </div>
+
+            )}
+
+
+            {animation && (
+              <div className="record_animation">
+                <div id="bars">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
+              </div>
+            )}
+
+            {loader && (
+              <div className='intro'>
+                <div class="spinner-box">
+                  <div class="pulse-container">
+                    <div class="pulse-bubble pulse-bubble-1"></div>
+                    <div class="pulse-bubble pulse-bubble-2"></div>
+                    <div class="pulse-bubble pulse-bubble-3"></div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </div>
-
+    </>
   )
 }
 

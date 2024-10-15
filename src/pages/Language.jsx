@@ -20,9 +20,9 @@ const Language = () => {
     <div class="main-container">
 
 <div class="content1">
-        {/* <div class="content1-img">
+        <div class="content1-img">
             <img src={logo2} />
-        </div> */}
+        </div>
         <h3 class="line1">HELLO, I AM</h3>
         <h1>KOMMON AI</h1>
         <h3 class="line3 ">Choose your preferred language
