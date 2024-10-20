@@ -588,7 +588,7 @@ const Audiospeaker = (props) => {
         font: selectedFont,
         lineWidth: 0.1, // Center alignment for table body cells
         valign: 'middle', // Center vertical alignment in table body cells
-        cellPadding: { top: 7, bottom: 7, left: 4, right: 4 },
+        cellPadding: { top: 5, bottom: 5, left: 4, right: 4 },
         // theme: 'grid',
         // lineWidth: 0.1,
       },
