@@ -4,12 +4,13 @@ import logo1 from "../assets/Kommon ai.png";
 import logo2 from "../assets/kommonschoollogo.png";
 import btnimg from "../assets/switch.png";
 import logo3 from "../assets/conversation-assessment.png";
+import logo5 from "../assets/download.png";
 import asserp from '../assets/assessment-report.pdf'
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import frstImg from '../images/Assessment Report_page-0001.jpg'
+import frstImg from '../images/Assessment Report_page-0001.png'
 import lstImg from '../images/Assessment Report_page-0007.jpg'
 import basicDs from '../images/basic details1.png'
 import transcriptss from '../images/transcript.png'
@@ -21,6 +22,9 @@ import tipss from '../images/tips.png'
 import notoSansDevanagariBase64 from '../fonts/noto-regular';
 import poppins from '../fonts/base';
 import logo4 from "../assets/kommonschoollogo.png";
+import { toast } from 'react-toastify';
+
+
 
 // import { useLocation } from 'react-router-dom';
 // import {components, pipelines, MediaStream} from 'media-stream-library';
@@ -77,6 +81,7 @@ const Audiospeaker = (props) => {
   const [status, setStatus] = useState(''); // Track status of assessment process
   const [isRecording, setIsRecording] = useState(false);
   const [animation, setAnimation] = useState(false);
+  const [download, setDownload] = useState(false);
   const [btn, setbtn] = useState(false);
   const [audioURL, setAudioURL] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -92,7 +97,9 @@ const Audiospeaker = (props) => {
   const [showIntro, setShowIntro] = useState(true);
   const [spAsseStat, setSpAsseStat] = useState(null); // New state for assessment status
   const [simulationIdd, setSimulationIdd] = useState(null); // Track simulationId
-  const [userIdd, setUserId] = useState(null); // Track simulationId
+  const [userIdd, setUserId] = useState(null); // Track 
+  const [recordingStartTime, setRecordingStartTime] = useState(null);
+
 
   useEffect(() => {
     // Retrieve the user's name from local storage
@@ -155,12 +162,20 @@ const Audiospeaker = (props) => {
     handleStopSpeaking();
   };
 
-  // Handle end conversation
   const handleEndConversation = () => {
-    setConversationEnded(true); // Set conversationEnded to true to hide the buttons and show the message
-    setStatus('inProgress');
-    stopRecording(); // Assuming this stops the audio recording
-    setLoader(true);
+    const currentTime = Date.now();
+    const elapsedTime = (currentTime - recordingStartTime) / 1000; // Convert to seconds
+
+    if (elapsedTime < 10) {
+      toast.error("Please continue speaking for at least 1 more minute.");
+    } else {
+      setConversationEnded(true); // Hide buttons and show message
+      setStatus('inProgress');
+      stopRecording(); // Stop the audio recording
+      setLoader(true);
+      setIsRecording(false); // End the recording session
+      setBtn(true); // Set the button state
+    }
   };
 
   // Handle restart practice
@@ -311,6 +326,7 @@ const Audiospeaker = (props) => {
 
     // Set Poppins font for the document
     doc.setFont('Poppins');
+    
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     let cursorY = 20; // Start position for Y axis
@@ -526,6 +542,7 @@ const Audiospeaker = (props) => {
       styles: {
         fontSize: 11,
         halign: 'left',
+        font: selectedFont,
         lineWidth: 0.1, // Center alignment for table body cells
         valign: 'middle', // Center vertical alignment in table body cells
         cellPadding: { top: 7, bottom: 7, left: 4, right: 4 },
@@ -568,6 +585,7 @@ const Audiospeaker = (props) => {
       styles: {
         fontSize: 11,
         halign: 'justify',
+        font: selectedFont,
         lineWidth: 0.1, // Center alignment for table body cells
         valign: 'middle', // Center vertical alignment in table body cells
         cellPadding: { top: 7, bottom: 7, left: 4, right: 4 },
@@ -616,35 +634,35 @@ const Audiospeaker = (props) => {
     });
     cursorY = doc.lastAutoTable.finalY + 10; // Add space below table
 
-    doc.addImage(tips, 'PNG', 15, cursorY, 80, 30);
+    // doc.addImage(tips, 'PNG', 15, cursorY, 80, 30);
 
     cursorY += 30 + -5;
-    const tableDataTips = [
-      [`Tip1: `, ` ${assessmentData.overallImprovementTips.tip1}`],
-      [`Tip2: `, `${assessmentData.overallImprovementTips.tip2}`],
-      [`Tip3: `, `${assessmentData.overallImprovementTips.tip3}`],
-      // [`Tip4: `, ${assessmentData.overallImprovementTips.tip4}],
-    ];
+    // const tableDataTips = [
+    //   [`Tip1: `, ` ${assessmentData.overallImprovementTips.tip1}`],
+    //   [`Tip2: `, `${assessmentData.overallImprovementTips.tip2}`],
+    //   [`Tip3: `, `${assessmentData.overallImprovementTips.tip3}`],
+    //   // [`Tip4: `, ${assessmentData.overallImprovementTips.tip4}],
+    // ];
 
-    doc.autoTable({
-      // head: [['Tips', 'Feedback']],
-      body: tableDataTips,
-      startY: cursorY + 10, // Positioning Y-axis
-      theme: 'grid',
-      styles: {
-        fontSize: 10,
-        lineWidth: 0,
-        valign: 'top',
-        cellPadding: { top: 0, bottom: 3, left: 0, right: 0 },
-        fillColor: null // Remove background color
-      },
-      didParseCell: function (data) {
-        if (data.section === 'body' && data.column.index === 0) {
-          // Apply bold font style to the first column
-          data.cell.styles.fontStyle = 'bold';
-        }
-      }
-    });
+    // doc.autoTable({
+    //   // head: [['Tips', 'Feedback']],
+    //   body: tableDataTips,
+    //   startY: cursorY + 10, // Positioning Y-axis
+    //   theme: 'grid',
+    //   styles: {
+    //     fontSize: 10,
+    //     lineWidth: 0,
+    //     valign: 'top',
+    //     cellPadding: { top: 0, bottom: 3, left: 0, right: 0 },
+    //     fillColor: null // Remove background color
+    //   },
+    //   didParseCell: function (data) {
+    //     if (data.section === 'body' && data.column.index === 0) {
+    //       // Apply bold font style to the first column
+    //       data.cell.styles.fontStyle = 'bold';
+    //     }
+    //   }
+    // });
 
     // ** Add Last Page with Image and Text (Without Footer) **
     doc.addPage();
@@ -729,6 +747,8 @@ const Audiospeaker = (props) => {
       mediaRecorderRef.current = recorder;
       audioChunksRef.current = audioChunks;
       setIsRecording(true);
+      setRecordingStartTime(Date.now()); // Store the start time of the recording
+
 
     } catch (error) {
       console.error("Error accessing media devices.", error);
@@ -750,6 +770,7 @@ const Audiospeaker = (props) => {
     // Encode the merged audio buffer into a WAV file
     const wavData = encodeWAV(buffer, audioContextRef.current.sampleRate);
     const blob = new Blob([wavData], { type: "audio/wav" });
+    console.log("Recording stopped");
 
     // Download the merged audio file locally
     // const url = URL.createObjectURL(blob);
@@ -814,6 +835,11 @@ const Audiospeaker = (props) => {
     } else if (status === 'preparingReport') {
       const timer = setTimeout(() => {
         setStatus('downloadReport');
+        if(status === 'downloadReport')
+        {
+
+          setDownload(true);
+        }
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -926,7 +952,7 @@ const Audiospeaker = (props) => {
                   </div>
                 )}
 
-                {!isRecording && (
+                {!isRecording && !conversationEnded &&  (
                   <button
                     className="record-button"
                     onClick={startRecording}
@@ -947,8 +973,13 @@ const Audiospeaker = (props) => {
                 )}
 
 
-                {/* No need for a "Recording..." button */}
-              </div>
+                {/* {conversationEnded && (
+                  <div>
+                    <p>Conversation has ended. Please wait...</p>
+                    {loader && <p>Loading...</p>}
+                  </div>
+                )}             */}
+                  </div>
 
               {/* Display userText or status message */}
               {userText === '' ? (
@@ -990,7 +1021,7 @@ const Audiospeaker = (props) => {
                       padding: '10px 20px',
                       backgroundColor: '#e07c30',
                       border: 'none',
-                      borderRadius: '25px',
+                      borderRadius: '15px',
                       color: '#fff',
                       fontSize: '16px',
                       cursor: 'pointer',
@@ -1010,7 +1041,7 @@ const Audiospeaker = (props) => {
                       padding: '10px 20px',
                       backgroundColor: spAsseStat === 2 ? '#e07c30' : '#cccccc', // Change color based on status
                       border: 'none',
-                      borderRadius: '25px',
+                      borderRadius: '15px',
                       color: '#fff',
                       fontSize: '16px',
                       cursor: spAsseStat === 2 ? 'pointer' : 'not-allowed', // Show pointer only when enabled
@@ -1021,7 +1052,9 @@ const Audiospeaker = (props) => {
                   >
                     {loading ? 'Fetching Assessment...' : getStatusMessage()} {/* Update button text */}
                   </button>
+                  
                 ) : null
+                
               ) : (
                 <div
                   style={{
@@ -1102,7 +1135,7 @@ const Audiospeaker = (props) => {
                     padding: '10px 40px',
                     backgroundColor: '#e07c30',
                     border: 'none',
-                    borderRadius: '25px',
+                    borderRadius: '15px',
                     color: '#fff',
                     fontSize: '16px',
                     cursor: 'pointer',
@@ -1116,48 +1149,54 @@ const Audiospeaker = (props) => {
             </div>
           </section>
           <div class="content-img-audio">
-             <Link to="/"> <img src={logo4} /></Link>
-            </div>
-            {showIntro && (
-              <div className='intro'>
-            
-                <h1>Start speech with your introduction or choose any topic that you want for 3 minutes...</h1>
-
-              </div>
-
-            )}
-
-
-            {animation && (
-              <div className="record_animation">
-                <div id="bars">
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                  <div class="bar"></div>
-                </div>
-              </div>
-            )}
-
-            {loader && (
-              <div className='intro'>
-                <div class="spinner-box">
-                  <div class="pulse-container">
-                    <div class="pulse-bubble pulse-bubble-1"></div>
-                    <div class="pulse-bubble pulse-bubble-2"></div>
-                    <div class="pulse-bubble pulse-bubble-3"></div>
-                  </div>
-                </div>
-              </div>
-            )}
+            <Link to="/"> <img src={logo4} /></Link>
           </div>
+          {showIntro && (
+            <div className='intro'>
+
+              <h1>Start speech with your introduction or choose any topic that you want for 3 minutes...</h1>
+
+            </div>
+
+          )}
+
+
+          {animation && (
+            <div className="record_animation">
+              <div id="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+          )}
+
+          {loader && (
+            <div className='intro'>
+              <div class="spinner-box">
+                <div class="pulse-container">
+                  <div class="pulse-bubble pulse-bubble-1"></div>
+                  <div class="pulse-bubble pulse-bubble-2"></div>
+                  <div class="pulse-bubble pulse-bubble-3"></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {download && !loading && ( // Image shows up after assessment is fetched
+      <div className="intro">
+        <img src={logo5} alt="Logo" />
+      </div>
+    )}
         </div>
+      </div>
     </>
   )
 }

@@ -1,16 +1,10 @@
-/* #root {
-  width: 100vw;
-  height: 100vh;
-  background: url(./assets/backgroundimage.jpg);
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
 
-
-
-} */
-
-
+}
 body {
   padding: 0;
   margin: 0;
@@ -18,7 +12,6 @@ body {
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-  height: 100vh;
 
 
 }
@@ -102,9 +95,21 @@ body {
   align-items: center;
   /* font-size: 59px; */
   /* color: white; */
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: 200;
 
   
   
+}
+
+.intro img{
+  position: relative;
+  top: -40px;
+}
+.intro img{
+ 
+  width: 200px;
 }
 
 @media screen and (min-width:0px) and (max-width:600px) {
@@ -399,7 +404,7 @@ span {
   padding: 10px 20px;
   background-color: #e07c30;
   border: none;
-  border-radius: 25px;
+  border-radius: 15px;
   color: #fff;
   font-size: 20px;
   cursor: pointer;
@@ -413,7 +418,8 @@ span {
 }
 
 .record-button:hover {
-  background-color: #1d2630;
+  background-color: #216b8d;
+
 }
 
 /* Responsive styles for mobile devices */
