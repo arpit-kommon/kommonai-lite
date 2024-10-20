@@ -166,7 +166,7 @@ const Audiospeaker = (props) => {
     const currentTime = Date.now();
     const elapsedTime = (currentTime - recordingStartTime) / 1000; // Convert to seconds
 
-    if (elapsedTime < 10) {
+    if (elapsedTime < 60) {
       toast.error("Please continue speaking for at least 1 more minute.");
     } else {
       setConversationEnded(true); // Hide buttons and show message
