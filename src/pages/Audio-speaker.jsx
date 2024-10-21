@@ -359,10 +359,12 @@ const Audiospeaker = (props) => {
     doc.addImage(basicD, 'PNG', 17, cursorY, 70, 30);
     cursorY += 30 + 8;
 
-    const currentDateTime = new Date();
+      const currentDateTime = assessmentData.recordedAt; // Get the timestamp
 
-    const date = currentDateTime.toLocaleDateString(); // Get the current date
-    const time = currentDateTime.toLocaleTimeString();
+    // Convert the timestamp to a Date object to get date and time strings
+    const date = new Date(currentDateTime).toLocaleDateString('en-IN'); // Get the current date
+    const time = new Date(currentDateTime).toLocaleTimeString('en-IN');
+    
     doc.autoTable({
       body: [
         ['Assessed Individual Name', `${firstName} ${lastName}`],
