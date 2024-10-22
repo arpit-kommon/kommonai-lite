@@ -166,7 +166,7 @@ const Audiospeaker = (props) => {
     const currentTime = Date.now();
     const elapsedTime = (currentTime - recordingStartTime) / 1000; // Convert to seconds
 
-    if (elapsedTime < 10) {
+    if (elapsedTime < 60) {
       toast.error("Please continue speaking for at least 1 more minute.");
     } else {
       setConversationEnded(true); // Hide buttons and show message
@@ -359,7 +359,8 @@ const Audiospeaker = (props) => {
     doc.addImage(basicD, 'PNG', 17, cursorY, 70, 30);
     cursorY += 30 + 8;
 
-    const currentDateTime = assessmentData.recordedAt; // Get the timestamp
+ // Get the timestamp
+      const currentDateTime = assessmentData.recordedAt; // Get the timestamp
 
     // Convert the timestamp to a Date object to get date and time strings
     const date = new Date(currentDateTime).toLocaleDateString('en-IN'); // Get the current date
