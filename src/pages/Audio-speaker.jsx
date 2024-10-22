@@ -359,6 +359,7 @@ const Audiospeaker = (props) => {
     doc.addImage(basicD, 'PNG', 17, cursorY, 70, 30);
     cursorY += 30 + 8;
 
+ // Get the timestamp
       const currentDateTime = assessmentData.recordedAt; // Get the timestamp
 
     // Convert the timestamp to a Date object to get date and time strings
@@ -636,35 +637,41 @@ const Audiospeaker = (props) => {
     });
     cursorY = doc.lastAutoTable.finalY + 10; // Add space below table
 
-    // doc.addImage(tips, 'PNG', 15, cursorY, 80, 30);
+    doc.addImage(tips, 'PNG', 15, cursorY, 80, 30);
 
     cursorY += 30 + -5;
-    // const tableDataTips = [
-    //   [`Tip1: `, ` ${assessmentData.overallImprovementTips.tip1}`],
-    //   [`Tip2: `, `${assessmentData.overallImprovementTips.tip2}`],
-    //   [`Tip3: `, `${assessmentData.overallImprovementTips.tip3}`],
-    //   // [`Tip4: `, ${assessmentData.overallImprovementTips.tip4}],
-    // ];
-
-    // doc.autoTable({
-    //   // head: [['Tips', 'Feedback']],
-    //   body: tableDataTips,
-    //   startY: cursorY + 10, // Positioning Y-axis
-    //   theme: 'grid',
-    //   styles: {
-    //     fontSize: 10,
-    //     lineWidth: 0,
-    //     valign: 'top',
-    //     cellPadding: { top: 0, bottom: 3, left: 0, right: 0 },
-    //     fillColor: null // Remove background color
-    //   },
-    //   didParseCell: function (data) {
-    //     if (data.section === 'body' && data.column.index === 0) {
-    //       // Apply bold font style to the first column
-    //       data.cell.styles.fontStyle = 'bold';
-    //     }
-    //   }
-    // });
+    const tableDataTips = [
+      [`1. ${assessmentData.tip1.title}`],
+      [`${assessmentData.tip1.description.trim()}`],
+      [`2. ${assessmentData.tip2.title}`],
+      [`${assessmentData.tip2.description.trim()}`],
+      [`3. ${assessmentData.tip3.title}`],
+      [`${assessmentData.tip3.description.trim()}`],
+      [`4. ${assessmentData.tip4.title}`],
+      [`${assessmentData.tip4.description.trim()}`],
+    ];
+    
+    doc.autoTable({
+      // head: [['Tips', 'Feedback']],
+      body: tableDataTips,
+      startY: cursorY + 10, // Positioning Y-axis
+      theme: 'grid',
+      styles: {
+        fontSize: 10,
+        lineWidth: 0,
+        valign: 'top',
+        cellPadding: { top: 2, bottom: 0, left: 0, right: 0 },
+        fillColor: null // Remove background color
+      },
+      didParseCell: function (data) {
+        if (data.section === 'body' && data.row.index % 2 === 0) {
+          // Apply bold font style to even rows
+          data.cell.styles.fontStyle = 'bold';
+        }
+      }
+      
+    });
+    
 
     // ** Add Last Page with Image and Text (Without Footer) **
     doc.addPage();
