@@ -359,10 +359,12 @@ const Audiospeaker = (props) => {
     doc.addImage(basicD, 'PNG', 17, cursorY, 70, 30);
     cursorY += 30 + 8;
 
-    const currentDateTime = new Date();
+    const currentDateTime = assessmentData.recordedAt; // Get the timestamp
 
-    const date = currentDateTime.toLocaleDateString(); // Get the current date
-    const time = currentDateTime.toLocaleTimeString();
+    // Convert the timestamp to a Date object to get date and time strings
+    const date = new Date(currentDateTime).toLocaleDateString('en-IN'); // Get the current date
+    const time = new Date(currentDateTime).toLocaleTimeString('en-IN');
+    
     doc.autoTable({
       body: [
         ['Assessed Individual Name', `${firstName} ${lastName}`],
@@ -588,7 +590,7 @@ const Audiospeaker = (props) => {
         font: selectedFont,
         lineWidth: 0.1, // Center alignment for table body cells
         valign: 'middle', // Center vertical alignment in table body cells
-        cellPadding: { top: 7, bottom: 7, left: 4, right: 4 },
+        cellPadding: { top: 5, bottom: 5, left: 4, right: 4 },
         // theme: 'grid',
         // lineWidth: 0.1,
       },
@@ -634,35 +636,41 @@ const Audiospeaker = (props) => {
     });
     cursorY = doc.lastAutoTable.finalY + 10; // Add space below table
 
-    // doc.addImage(tips, 'PNG', 15, cursorY, 80, 30);
+    doc.addImage(tips, 'PNG', 15, cursorY, 80, 30);
 
     cursorY += 30 + -5;
-    // const tableDataTips = [
-    //   [`Tip1: `, ` ${assessmentData.overallImprovementTips.tip1}`],
-    //   [`Tip2: `, `${assessmentData.overallImprovementTips.tip2}`],
-    //   [`Tip3: `, `${assessmentData.overallImprovementTips.tip3}`],
-    //   // [`Tip4: `, ${assessmentData.overallImprovementTips.tip4}],
-    // ];
-
-    // doc.autoTable({
-    //   // head: [['Tips', 'Feedback']],
-    //   body: tableDataTips,
-    //   startY: cursorY + 10, // Positioning Y-axis
-    //   theme: 'grid',
-    //   styles: {
-    //     fontSize: 10,
-    //     lineWidth: 0,
-    //     valign: 'top',
-    //     cellPadding: { top: 0, bottom: 3, left: 0, right: 0 },
-    //     fillColor: null // Remove background color
-    //   },
-    //   didParseCell: function (data) {
-    //     if (data.section === 'body' && data.column.index === 0) {
-    //       // Apply bold font style to the first column
-    //       data.cell.styles.fontStyle = 'bold';
-    //     }
-    //   }
-    // });
+    const tableDataTips = [
+      [`1. ${assessmentData.tip1.title}`],
+      [`${assessmentData.tip1.description.trim()}`],
+      [`2. ${assessmentData.tip2.title}`],
+      [`${assessmentData.tip2.description.trim()}`],
+      [`3. ${assessmentData.tip3.title}`],
+      [`${assessmentData.tip3.description.trim()}`],
+      [`4. ${assessmentData.tip4.title}`],
+      [`${assessmentData.tip4.description.trim()}`],
+    ];
+    
+    doc.autoTable({
+      // head: [['Tips', 'Feedback']],
+      body: tableDataTips,
+      startY: cursorY + 10, // Positioning Y-axis
+      theme: 'grid',
+      styles: {
+        fontSize: 10,
+        lineWidth: 0,
+        valign: 'top',
+        cellPadding: { top: 2, bottom: 0, left: 0, right: 0 },
+        fillColor: null // Remove background color
+      },
+      didParseCell: function (data) {
+        if (data.section === 'body' && data.row.index % 2 === 0) {
+          // Apply bold font style to even rows
+          data.cell.styles.fontStyle = 'bold';
+        }
+      }
+      
+    });
+    
 
     // ** Add Last Page with Image and Text (Without Footer) **
     doc.addPage();
